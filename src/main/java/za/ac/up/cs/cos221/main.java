@@ -4,6 +4,8 @@
  */
 package za.ac.up.cs.cos221;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -222,6 +224,11 @@ public class main extends javax.swing.JFrame {
         });
 
         jbtDelete.setText("Remove Client");
+        jbtDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtDeleteActionPerformed(evt);
+            }
+        });
 
         jbtUpdate.setText("Update Client Information");
 
@@ -314,6 +321,81 @@ public class main extends javax.swing.JFrame {
             cI = new clientInsert(this);
         cI.setVisible(true);
     }//GEN-LAST:event_jbtInsertActionPerformed
+
+    private void jbtDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDeleteActionPerformed
+        // TODO add your handling code here:
+        if (jtblClients.getSelectionModel().isSelectionEmpty() == true)
+            JOptionPane.showMessageDialog(this, "Please select a client to remove.");
+        else
+        {
+            int index = jtblClients.getSelectedRow();
+            String name = (String)jtblClients.getValueAt(index, 0);
+            String surname = (String)jtblClients.getValueAt(index, 1);
+            String email = (String)jtblClients.getValueAt(index, 2);
+            String address = (String)jtblClients.getValueAt(index, 3);
+            String address2 = (String)jtblClients.getValueAt(index, 4);
+            String district = (String)jtblClients.getValueAt(index, 5);
+            String city = (String)jtblClients.getValueAt(index, 6);
+            String post = (String)jtblClients.getValueAt(index, 7);
+            String phone = (String)jtblClients.getValueAt(index, 8);
+            String store = (String)jtblClients.getValueAt(index, 9);
+            String active = (String)jtblClients.getValueAt(index, 10);
+            
+            int input = JOptionPane.showConfirmDialog(this, "You sure you want to remove customer:\n" + 
+                                                        "First Name: " + name + "\n" +
+                                                        "Last Name: " + surname + "\n" +
+                                                        "Email: " + email + "\n" +
+                                                        "Address: " + address + "\n" +
+                                                        "Address 2: " + address2 + "\n" +
+                                                        "Distinct: " + district + "\n" +
+                                                        "City: " + city + "\n" +
+                                                        "Postal Code: " + post + "\n" +
+                                                        "Phone: " + phone + "\n" +
+                                                        "Store Name: " + store + "\n" +
+                                                        "Active: " + active);
+            
+            if (input == 0)
+            {
+                if (email.length() == 0)
+                    email = " IS NULL OR email = ''";
+                else
+                    email = "= '" + email + "'";
+                
+                if (address2.length() == 0)
+                    address2 = "IS NULL OR address2 = ''";
+                else
+                    address2 = "= '" + address2 + "'";
+
+                if (post.length() == 0)
+                    post = "IS NULL OR postal_code = ''";
+                else
+                    post = "= '" + post + "'";
+                
+                Database instance = Database.instance();
+                
+                String citySQL = "(SELECT city_id " +
+                                 "FROM city " +
+                                 "WHERE city = '" + city + "')";
+                
+                String addressSQL = "(SELECT address_id " +
+                                    "FROM address " +
+                                    "WHERE address = '" + address + "' AND address2 " + address2 +
+                                    " AND district = '" + district + "' AND city_id = " + citySQL + 
+                                    " AND postal_code " + post + " AND phone = '" + phone + "')";
+                
+                String sql = "DELETE FROM customer " +
+                             "WHERE customer_id = (SELECT customer_id " + 
+                             "FROM customer " +
+                             "WHERE first_name = '" + name + "' AND last_name = '" + surname + 
+                             "' AND email " + email + " AND address_id = " + addressSQL + 
+                             " AND active = " + active + " AND store_id = " + store + ")";
+                instance.execSQL(sql);
+                JOptionPane.showMessageDialog(this, "Client removed successfully.");
+                
+                refreshClients();
+            }
+        }
+    }//GEN-LAST:event_jbtDeleteActionPerformed
 
     private void filterRows()
     {

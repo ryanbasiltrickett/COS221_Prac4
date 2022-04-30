@@ -273,7 +273,7 @@ public class clientInsert extends javax.swing.JFrame {
                             "FROM address " +
                             "WHERE address = '" + address + "' AND address2 " + address2 +
                             " AND district = '" + district + "' AND city_id = " + citySQL + 
-                            " AND postal_code " + post + " AND '" + phone + "')";        
+                            " AND postal_code " + post + " AND phone = '" + phone + "')";        
         sql = "INSERT INTO customer " +
               "(first_name, last_name, email, address_id, store_id) " +
               "VALUES('" + name + "', '" + surname + "', " + email + ", " + addressSQL +

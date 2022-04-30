@@ -402,7 +402,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                       <Component id="jbtInsert" min="-2" pref="229" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="jbtDelete" min="-2" pref="240" max="-2" attributes="0"/>
@@ -458,6 +458,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Client"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtInsertActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbtDelete">
               <Properties>
