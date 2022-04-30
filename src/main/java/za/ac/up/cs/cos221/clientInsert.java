@@ -56,6 +56,7 @@ public class clientInsert extends javax.swing.JFrame {
         jlblPhone = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setType(java.awt.Window.Type.POPUP);
 
         jlblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jlblTitle.setText("Add Client");
@@ -258,12 +259,12 @@ public class clientInsert extends javax.swing.JFrame {
                      citySQL + ", " + post + ", '" + phone + "')";
         instance.execSQL(sql);
         
-        if (address2.length() == 0)
+        if (address2 == "NULL")
             address2 = "IS NULL";
         else
             address2 = "= " + address2;
         
-        if (post.length() == 0)
+        if (post == "NULL")
             post = "IS NULL";
         else
             post = "= " + post;
@@ -272,9 +273,7 @@ public class clientInsert extends javax.swing.JFrame {
                             "FROM address " +
                             "WHERE address = '" + address + "' AND address2 " + address2 +
                             " AND district = '" + district + "' AND city_id = " + citySQL + 
-                            " AND postal_code " + post + " AND '" + phone + "')";
-        System.out.println(instance.returnArray(sql)[0]);
-        
+                            " AND postal_code " + post + " AND '" + phone + "')";        
         sql = "INSERT INTO customer " +
               "(first_name, last_name, email, address_id, store_id) " +
               "VALUES('" + name + "', '" + surname + "', " + email + ", " + addressSQL +
