@@ -5,6 +5,7 @@
 package za.ac.up.cs.cos221;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -16,7 +17,9 @@ public class main extends javax.swing.JFrame {
     TableRowSorter staffSorter;
     TableRowSorter filmSorter;
     TableRowSorter reportSorter;
+    TableRowSorter clientSorter;
     filmsInsert fI = null;
+    clientInsert cI = null;
     
     /**
      * Creates new form main
@@ -29,6 +32,9 @@ public class main extends javax.swing.JFrame {
         
         filmSorter = new TableRowSorter(jtblFilms.getModel());
         jtblFilms.setRowSorter(filmSorter);
+        
+        clientSorter = new TableRowSorter(jtblClients.getModel());
+        jtblClients.setRowSorter(clientSorter);
     }
 
     /**
@@ -209,6 +215,11 @@ public class main extends javax.swing.JFrame {
         jspClients.setViewportView(jtblClients);
 
         jbtInsert.setText("Add Client");
+        jbtInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtInsertActionPerformed(evt);
+            }
+        });
 
         jbtDelete.setText("Remove Client");
 
@@ -223,7 +234,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jspClients, javax.swing.GroupLayout.DEFAULT_SIZE, 1139, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jplClientsLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(153, 153, 153)
                 .addComponent(jbtInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,6 +308,13 @@ public class main extends javax.swing.JFrame {
         jtblInventory.setRowSorter(reportSorter);
     }//GEN-LAST:event_jbtReportActionPerformed
 
+    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
+        // TODO add your handling code here:
+        if (cI == null)
+            cI = new clientInsert(this);
+        cI.setVisible(true);
+    }//GEN-LAST:event_jbtInsertActionPerformed
+
     private void filterRows()
     {
         staffSorter.setRowFilter(new rowFilter(jtfLastName.getText()));
@@ -360,6 +378,13 @@ public class main extends javax.swing.JFrame {
         jtblFilms.setModel(populateFilms());
         filmSorter = new TableRowSorter(jtblFilms.getModel());
         jtblFilms.setRowSorter(filmSorter);
+    }
+    
+    public void refreshClients()
+    {
+        jtblClients.setModel(populateClients());
+        clientSorter = new TableRowSorter(jtblClients.getModel());
+        jtblClients.setRowSorter(clientSorter);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

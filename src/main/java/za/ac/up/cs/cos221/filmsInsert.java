@@ -255,6 +255,11 @@ public class filmsInsert extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        parentForm.refreshFilms();
+    }//GEN-LAST:event_formWindowClosed
+
     private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
         // TODO add your handling code here:
         String title = jtfTitle.getText();
@@ -266,64 +271,59 @@ public class filmsInsert extends javax.swing.JFrame {
         String replaceCost = jtfReplaceCost.getText();
         String rating = jtfRating.getText();
         String special = jtfSpecial.getText();
-        
+
         Database instance = Database.instance();
-        
+
         String langSql = "(SELECT language_id " +
-                         "FROM language " +
-                         "WHERE name = '" + (String)jcbxLanguage.getSelectedItem() + "')";        
-        
+        "FROM language " +
+        "WHERE name = '" + (String)jcbxLanguage.getSelectedItem() + "')";
+
         if (desc.length() == 0)
             desc = "NULL";
-        else 
+        else
             desc = "'" + desc + "'";
-        
+
         if (yearReleased.length() == 0)
             yearReleased = "NULL";
-        else 
+        else
             yearReleased = "'" + yearReleased + "'";
-        
+
         String orgLangSQL;
-        if (((String)jcbxOrigLang.getSelectedItem()).length() != 0) 
+        if (((String)jcbxOrigLang.getSelectedItem()).length() != 0)
         {
             orgLangSQL = "(SELECT language_id " +
-                    "FROM language " +
-                    "WHERE name = '" + (String)jcbxOrigLang.getSelectedItem() + "')";
-        } 
+            "FROM language " +
+            "WHERE name = '" + (String)jcbxOrigLang.getSelectedItem() + "')";
+        }
         else
             orgLangSQL = "NULL";
-        
+
         if (length.length() == 0)
             length = "NULL";
-        
+
         if (rating.length() == 0)
             rating = "NULL";
-        else 
+        else
             rating = "'" + rating + "'";
-        
+
         if (special.length() == 0)
             special = "NULL";
-        else 
+        else
             special = "'" + special + "'";
-            
+
         String sql = "INSERT INTO film " +
-                     "(title, description, release_year, language_id, original_language_id, " + 
+                     "(title, description, release_year, language_id, original_language_id, " +
                      "rental_duration, rental_rate, length, replacement_cost, rating, special_features) " +
-                     "VALUES('" + title + "', " + desc + ", " + yearReleased + ", " + langSql + 
-                     ", " + orgLangSQL + ", " + duration + ", " + rate + ", " + length + ", " + 
+                     "VALUES('" + title + "', " + desc + ", " + yearReleased + ", " + langSql +
+                     ", " + orgLangSQL + ", " + duration + ", " + rate + ", " + length + ", " +
                      replaceCost + ", " + rating + ", " + special + ")";
-        instance.execSQL(sql);        
+        instance.execSQL(sql);
         JOptionPane.showMessageDialog(this, "Film added successfully.");
-        
+
         clearForm();
-        
+
         parentForm.refreshFilms();
     }//GEN-LAST:event_jbtInsertActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        parentForm.refreshFilms();
-    }//GEN-LAST:event_formWindowClosed
     
     private void clearForm()
     {
