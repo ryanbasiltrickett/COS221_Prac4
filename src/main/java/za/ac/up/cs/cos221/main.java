@@ -55,6 +55,11 @@ public class main extends javax.swing.JFrame {
         jtblInventory = new javax.swing.JTable();
         jbtReport = new javax.swing.JButton();
         jplClients = new javax.swing.JPanel();
+        jspClients = new javax.swing.JScrollPane();
+        jtblClients = new javax.swing.JTable();
+        jbtInsert = new javax.swing.JButton();
+        jbtDelete = new javax.swing.JButton();
+        jbtUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COS221 Prac 4");
@@ -86,12 +91,12 @@ public class main extends javax.swing.JFrame {
         jplStaff.setLayout(jplStaffLayout);
         jplStaffLayout.setHorizontalGroup(
             jplStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplStaffLayout.createSequentialGroup()
-                .addContainerGap(481, Short.MAX_VALUE)
+            .addGroup(jplStaffLayout.createSequentialGroup()
+                .addGap(404, 404, 404)
                 .addComponent(jlbLastName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(338, 338, 338))
+                .addContainerGap(415, Short.MAX_VALUE))
             .addGroup(jplStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jplStaffLayout.createSequentialGroup()
                     .addContainerGap()
@@ -101,11 +106,11 @@ public class main extends javax.swing.JFrame {
         jplStaffLayout.setVerticalGroup(
             jplStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jplStaffLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(24, 24, 24)
                 .addGroup(jplStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbLastName)
                     .addComponent(jtfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
             .addGroup(jplStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplStaffLayout.createSequentialGroup()
                     .addContainerGap(67, Short.MAX_VALUE)
@@ -200,15 +205,43 @@ public class main extends javax.swing.JFrame {
 
         jtpMenu.addTab("Inventory", jplInventory);
 
+        jtblClients.setModel(populateClients());
+        jspClients.setViewportView(jtblClients);
+
+        jbtInsert.setText("Add Client");
+
+        jbtDelete.setText("Remove Client");
+
+        jbtUpdate.setText("Update Client Information");
+
         javax.swing.GroupLayout jplClientsLayout = new javax.swing.GroupLayout(jplClients);
         jplClients.setLayout(jplClientsLayout);
         jplClientsLayout.setHorizontalGroup(
             jplClientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1151, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jplClientsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jspClients, javax.swing.GroupLayout.DEFAULT_SIZE, 1139, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jplClientsLayout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jbtInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(jbtDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(jbtUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jplClientsLayout.setVerticalGroup(
             jplClientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGroup(jplClientsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jspClients, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jplClientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jbtDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         jtpMenu.addTab("Clients", jplClients);
@@ -309,6 +342,19 @@ public class main extends javax.swing.JFrame {
         return new DefaultTableModel(instance.returnRows(sql), headers);
     }
     
+    private DefaultTableModel populateClients()
+    {
+        String[] headers = {"First Name", "Last Name", "Email", "Address", "Address 2", "District", "City", "Postal Code", "Phone", "Store Name", "Active"};
+        
+        Database instance = Database.instance();
+        
+        String sql = "SELECT first_name, last_name, email, address, address2, district, city, postal_code, phone, store_id, active " +
+                     "FROM address, customer, city " +
+                     "WHERE customer.address_id = address.address_id AND address.city_id = city.city_id";
+        
+        return new DefaultTableModel(instance.returnRows(sql), headers);
+    }
+    
     public void refreshFilms()
     {
         jtblFilms.setModel(populateFilms());
@@ -317,16 +363,21 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbtDelete;
+    private javax.swing.JButton jbtInsert;
     private javax.swing.JButton jbtInsertFilm;
     private javax.swing.JButton jbtReport;
+    private javax.swing.JButton jbtUpdate;
     private javax.swing.JLabel jlbLastName;
     private javax.swing.JPanel jplClients;
     private javax.swing.JPanel jplFilms;
     private javax.swing.JPanel jplInventory;
     private javax.swing.JPanel jplStaff;
+    private javax.swing.JScrollPane jspClients;
     private javax.swing.JScrollPane jspFilms;
     private javax.swing.JScrollPane jspInventory;
     private javax.swing.JScrollPane jspStaff;
+    public javax.swing.JTable jtblClients;
     public javax.swing.JTable jtblFilms;
     public javax.swing.JTable jtblInventory;
     public javax.swing.JTable jtblStaff;
