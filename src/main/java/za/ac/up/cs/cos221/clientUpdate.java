@@ -36,12 +36,27 @@ public class clientUpdate extends javax.swing.JFrame {
         int index = table.getSelectedRow();
         name = (String)table.getValueAt(index, 0);
         surname = (String)table.getValueAt(index, 1);
-        email = (String)table.getValueAt(index, 2);
+        
+        if ((String)table.getValueAt(index, 2) == null)
+            email = "";
+        else
+            email = (String)table.getValueAt(index, 2);
+        
         address = (String)table.getValueAt(index, 3);
-        address2 = (String)table.getValueAt(index, 4);
+        
+        if ((String)table.getValueAt(index, 4) == null)
+            address2 = "";
+        else
+            address2 = (String)table.getValueAt(index, 4);
+        
         district = (String)table.getValueAt(index, 5);
         city = (String)table.getValueAt(index, 6);
-        post = (String)table.getValueAt(index, 7);
+        
+        if ((String)table.getValueAt(index, 7) == null)
+            post = "";
+        else
+            post = (String)table.getValueAt(index, 7);
+        
         phone = (String)table.getValueAt(index, 8);
         store = (String)table.getValueAt(index, 9);
         active = (String)table.getValueAt(index, 10);
@@ -267,68 +282,264 @@ public class clientUpdate extends javax.swing.JFrame {
     private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
         // TODO add your handling code here:
         String newName = jtfName.getText();
-        String newSurname = jtfName.getText();
-        String newEmail = jtfName.getText();
-        String newAddress = jtfName.getText();
-        String newAddress2 = jtfName.getText();
-        String newDistrict = jtfName.getText();
+        String newSurname = jtfSurname.getText();
+        String newEmail = jtfEmail.getText();
+        String newAddress = jtfAddress.getText();
+        String newAddress2 = jtfAddress2.getText();
+        String newDistrict = jtfDistrict.getText();
         String newCity = (String)jcbxCity.getSelectedItem();
-        String newPost = jtfName.getText();
-        String newPhone = jtfName.getText();
+        String newPost = jtfPost.getText();
+        String newPhone = jtfPhone.getText();
         String newStore = (String)jcbxStore.getSelectedItem();
         String newActive = (String)jcbxActive.getSelectedItem();
         
-        String sql = "UPDATE customer " +
-                     "SET";
-        
-        if (newName != name)
-        {
-            sql += " first_name = '" + newName + "'";
-        }
-        
-        if (newSurname != surname)
-        {
-            if (sql == "UPDATE customer " + "SET")
-                sql += " last_name = '" + newSurname + "'";
-            else
-                sql += " AND last_name = '" + newSurname + "'";
-        }
-        
-        if (newEmail != email)
-        {
-            if (sql == "UPDATE customer " + "SET")
-                sql += " email = '" + newEmail + "'";
-            else
-                sql += " AND email = '" + newEmail + "'";
-        }
-        
-        if (newStore != store)
-        {
-            if (sql == "UPDATE customer " + "SET")
-                sql += " store_id = " + newStore + "";
-            else
-                sql += " AND store_id = " + newStore + "";
-        }
-        
-        if (newActive != active)
-        {
-            if (newActive == "True")
-                newActive = "1";
-            else
-                newActive = "0";
+        int input = JOptionPane.showConfirmDialog(this, "You sure you want to update customer:\n" + 
+                                                        "First Name: " + name + "\n" +
+                                                        "Last Name: " + surname + "\n" +
+                                                        "Email: " + email + "\n" +
+                                                        "Address: " + address + "\n" +
+                                                        "Address 2: " + address2 + "\n" +
+                                                        "Distinct: " + district + "\n" +
+                                                        "City: " + city + "\n" +
+                                                        "Postal Code: " + post + "\n" +
+                                                        "Phone: " + phone + "\n" +
+                                                        "Store Name: " + store + "\n" +
+                                                        "Active: " + active + "\n\n" +
+                                                        "Who will have be updated to the following information:\n" +
+                                                        "First Name: " + newName + "\n" +
+                                                        "Last Name: " + newSurname + "\n" +
+                                                        "Email: " + newEmail + "\n" +
+                                                        "Address: " + newAddress + "\n" +
+                                                        "Address 2: " + newAddress2 + "\n" +
+                                                        "Distinct: " + newDistrict + "\n" +
+                                                        "City: " + newCity + "\n" +
+                                                        "Postal Code: " + newPost + "\n" +
+                                                        "Phone: " + newPhone + "\n" +
+                                                        "Store Name: " + newStore + "\n" +
+                                                        "Active: " + newActive);
             
-            if (sql == "UPDATE customer " + "SET")
-                sql += " active = " + newActive + "";
-            else
-                sql += " AND active = " + newActive + "";
-        }
-        
-        if (sql != "UPDATE customer " + "SET")
+        if (input == 0)
         {
+            boolean updated = false;
+
+            String sql = "UPDATE address " +
+                         "SET";
+
+            if (newAddress.equals(address) == false)
+            {
+                sql += " address = '" + newAddress + "'";
+            }
+
+            if (newAddress2.equals(address2) == false)
+            {
+                if (newAddress2.length() == 0)
+                    newAddress2 = "NULL";
+                else
+                    newAddress2 = "'" + newAddress2 + "'";
+
+                if (sql.equals("UPDATE address " + "SET"))
+                    sql += " address2 = " + newAddress2;
+                else
+                    sql += ", address2 = " + newAddress2;
+            }
+
+            if (newDistrict.equals(district) == false)
+            {
+                if (sql.equals("UPDATE address " + "SET"))
+                    sql += " district = '" + newDistrict + "'";
+                else
+                    sql += ", district = '" + newDistrict + "'";
+            }
+
+            if (newCity.equals(city) == false)
+            {
+                String citySQL = "(SELECT city_id " +
+                                 "FROM city " +
+                                 "WHERE city = '" + newCity + "')";
+
+                if (sql.equals("UPDATE address " + "SET"))
+                    sql += " city_id = " + citySQL;
+                else
+                    sql += ", city_id = " + citySQL;
+            }
+
+            if (newPost.equals(post) == false)
+            {
+                if (newPost.length() == 0)
+                    newPost = "NULL";
+                else
+                    newPost = "'" + newPost + "'";
+
+                if (sql.equals("UPDATE address " + "SET"))
+                    sql += " postal_code = " + newPost;
+                else
+                    sql += ", postal_code = " + newPost;
+            }
+
+            if (newPhone.equals(phone) == false)
+            {
+                if (sql.equals("UPDATE address " + "SET"))
+                    sql += " phone = '" + newPhone + "'";
+                else
+                    sql += ", phone = '" + newPhone + "'";
+            }
+
             Database instance = Database.instance();
-            instance.execSQL(sql);
-            JOptionPane.showMessageDialog(this, "Client updated successfully.");
-            parentForm.refreshClients();
+
+            if (sql.equals("UPDATE address " + "SET") == false)
+            {
+                if (address2.length() == 0)
+                    address2 = "IS NULL OR address2 = ''";
+                else
+                    address2 = " = '" + address2 + "'";
+
+                if (post.length() == 0)
+                    post = "IS NULL OR postal_code = ''";
+                else
+                    post = " = '" + post + "'";
+
+                String citySQL = "(SELECT city_id " +
+                             "FROM city " +
+                             "WHERE city = '" + city + "')";
+
+                String addressSQL = "(SELECT address_id " +
+                                    "FROM address " +
+                                    "WHERE address = '" + address + "' AND address2 " + address2 +
+                                    " AND district = '" + district + "' AND city_id = " + citySQL + 
+                                    " AND postal_code " + post + " AND phone = '" + phone + "')";
+
+                sql += " WHERE address_id = " + addressSQL;
+
+                System.out.println(sql);
+                instance.execSQL(sql);
+                updated = true;
+            }
+
+            sql = "UPDATE customer " +
+                  "SET";
+
+            if (newName.equals(name) == false)
+            {
+                sql += " first_name = '" + newName + "'";
+            }
+
+            if (newSurname.equals(surname) == false)
+            {
+                if (sql.equals("UPDATE customer " + "SET"))
+                    sql += " last_name = '" + newSurname + "'";
+                else
+                    sql += ", last_name = '" + newSurname + "'";
+            }
+
+            if (newEmail.equals(email) == false)
+            {
+                if (newEmail.length() == 0)
+                    newEmail = "NULL";
+                else
+                    newEmail = "'" + newEmail + "'";
+
+                if (sql.equals("UPDATE customer " + "SET"))
+                    sql += " email = " + newEmail;
+                else
+                    sql += ", email = " + newEmail;
+            }
+
+            if (newStore.equals(store) == false)
+            {
+                if (sql.equals("UPDATE customer " + "SET"))
+                    sql += " store_id = " + newStore;
+                else
+                    sql += ", store_id = " + newStore;
+            }
+
+            if (newActive.equals(active) == false)
+            {
+                String activeSQL;
+                if (newActive.equals("True"))
+                    activeSQL = "1";
+                else
+                    activeSQL = "0";
+
+                if (sql.equals("UPDATE customer " + "SET"))
+                    sql += " active = " + activeSQL;
+                else
+                    sql += ", active = " + activeSQL;
+            }
+
+            if (sql.equals("UPDATE customer " + "SET") == false)
+            {
+                String address2SQL, postSQL;
+                if (newAddress2.length() == 0 || newAddress2.equals("NULL"))
+                    address2SQL = "IS NULL OR address2 = ''";
+                else
+                {
+                    if (updated)
+                        address2SQL = " = " + newAddress2;
+                    else
+                        address2SQL = " = '" + newAddress2 + "'";
+                }
+                
+                if (newPost.length() == 0)
+                    postSQL = "IS NULL OR postal_code = ''";
+                else
+                {
+                    if (updated)
+                        postSQL = " = " + newPost;
+                    else
+                        postSQL = " = '" + newPost + "'";
+                }
+                
+                if (email.length() == 0)
+                    email = " IS NULL";
+                else
+                    email = " = '" + email + "'";
+
+                String citySQL = "(SELECT city_id " +
+                             "FROM city " +
+                             "WHERE city = '" + newCity + "')";
+
+                String addressSQL = "(SELECT address_id " +
+                                    "FROM address " +
+                                    "WHERE address = '" + newAddress + "' AND address2 " + address2SQL +
+                                    " AND district = '" + newDistrict + "' AND city_id = " + citySQL + 
+                                    " AND postal_code " + postSQL + " AND phone = '" + newPhone + "')";
+
+                String activeSQL;
+                if (active.equals("True"))
+                    activeSQL = "1";
+                else
+                    activeSQL = "0";
+                
+                String customerSQL = "(SELECT customer_id " + 
+                                     "FROM customer " +
+                                     "WHERE first_name = '" + name + "' AND last_name = '" + surname + 
+                                     "' AND email " + email + " AND address_id = " + addressSQL + 
+                                     " AND active = " + activeSQL + " AND store_id = " + store + ")";
+
+                sql += " WHERE customer_id = " + customerSQL;
+
+                System.out.println(sql);
+                instance.execSQL(sql);
+                updated = true;
+            }
+
+            if (updated)
+            {
+                parentForm.refreshClients();
+                JOptionPane.showMessageDialog(this, "Client updated successfully.");
+
+                name = jtfName.getText();
+                surname = jtfSurname.getText();
+                email = jtfEmail.getText();
+                address = jtfAddress.getText();
+                address2 = jtfAddress2.getText();
+                district = jtfDistrict.getText();
+                city = (String)jcbxCity.getSelectedItem();
+                post = jtfPost.getText();
+                phone = jtfPhone.getText();
+                store = (String)jcbxStore.getSelectedItem();
+                active = (String)jcbxActive.getSelectedItem();
+            }
         }
     }//GEN-LAST:event_jbtUpdateActionPerformed
 

@@ -344,12 +344,30 @@ public class main extends javax.swing.JFrame {
             int index = jtblClients.getSelectedRow();
             String name = (String)jtblClients.getValueAt(index, 0);
             String surname = (String)jtblClients.getValueAt(index, 1);
-            String email = (String)jtblClients.getValueAt(index, 2);
+            
+            String email;
+            if ((String)jtblClients.getValueAt(index, 2) == null)
+                email = "";
+            else
+                email = (String)jtblClients.getValueAt(index, 2);
+            
             String address = (String)jtblClients.getValueAt(index, 3);
-            String address2 = (String)jtblClients.getValueAt(index, 4);
+            
+            String address2;
+            if ((String)jtblClients.getValueAt(index, 4) == null)
+                address2 = "";
+            else
+                address2 = (String)jtblClients.getValueAt(index, 4);
+            
             String district = (String)jtblClients.getValueAt(index, 5);
             String city = (String)jtblClients.getValueAt(index, 6);
-            String post = (String)jtblClients.getValueAt(index, 7);
+            
+            String post;
+            if ((String)jtblClients.getValueAt(index, 7) == null)
+                post = "";
+            else
+                post = (String)jtblClients.getValueAt(index, 7);
+            
             String phone = (String)jtblClients.getValueAt(index, 8);
             String store = (String)jtblClients.getValueAt(index, 9);
             String active = (String)jtblClients.getValueAt(index, 10);
@@ -384,6 +402,11 @@ public class main extends javax.swing.JFrame {
                 else
                     post = "= '" + post + "'";
                 
+                if (active.equals("True"))
+                    active = "1";
+                else
+                    active = "0";
+                
                 Database instance = Database.instance();
                 
                 String citySQL = "(SELECT city_id " +
@@ -396,14 +419,15 @@ public class main extends javax.swing.JFrame {
                                     " AND district = '" + district + "' AND city_id = " + citySQL + 
                                     " AND postal_code " + post + " AND phone = '" + phone + "')";
                 
-                String sql = "DELETE FROM customer " +
+                String sql = "UPDATE customer " +
+                             "SET active = 0 " +
                              "WHERE customer_id = (SELECT customer_id " + 
-                             "FROM customer " +
-                             "WHERE first_name = '" + name + "' AND last_name = '" + surname + 
-                             "' AND email " + email + " AND address_id = " + addressSQL + 
-                             " AND active = " + active + " AND store_id = " + store + ")";
+                                                   "FROM customer " +
+                                                   "WHERE first_name = '" + name + "' AND last_name = '" + surname + 
+                                                   "' AND email " + email + " AND address_id = " + addressSQL + 
+                                                   " AND active = " + active + " AND store_id = " + store + ")";
                 instance.execSQL(sql);
-                JOptionPane.showMessageDialog(this, "Client removed successfully.");
+                JOptionPane.showMessageDialog(this, "Client set inactive successfully.");
                 
                 refreshClients();
             }
@@ -443,7 +467,17 @@ public class main extends javax.swing.JFrame {
                      "FROM staff, address, city " +
                      "WHERE staff.address_id = address.address_id AND address.city_id = city.city_id";
         
-        return new DefaultTableModel(instance.returnRows(sql), headers);
+        Object[][] arr = instance.returnRows(sql);
+        
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i][9].equals("1"))
+                arr[i][9] = "True";
+            else
+                arr[i][9] = "False";
+        }
+        
+        return new DefaultTableModel(arr, headers);
     }
     
     private DefaultTableModel populateFilms()
@@ -485,7 +519,17 @@ public class main extends javax.swing.JFrame {
                      "FROM address, customer, city " +
                      "WHERE customer.address_id = address.address_id AND address.city_id = city.city_id";
         
-        return new DefaultTableModel(instance.returnRows(sql), headers);
+        Object[][] arr = instance.returnRows(sql);
+        
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i][10].equals("1"))
+                arr[i][10] = "True";
+            else
+                arr[i][10] = "False";
+        }
+        
+        return new DefaultTableModel(arr, headers);
     }
     
     public void refreshFilms()
