@@ -6,22 +6,61 @@ package za.ac.up.cs.cos221;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author Ryan
  */
-public class clientInsert extends javax.swing.JFrame {
+public class clientUpdate extends javax.swing.JFrame {
 
     main parentForm;
+    String name;
+    String surname;
+    String email;
+    String address;
+    String address2;
+    String district;
+    String city;
+    String post;
+    String phone;
+    String store;
+    String active;
     
     /**
-     * Creates new form clientInsert
+     * Creates new form clientUpdate
      */
-    public clientInsert(main parent) {
+    public clientUpdate(main parent, JTable table) {
         parentForm = parent;
+        
+        int index = table.getSelectedRow();
+        name = (String)table.getValueAt(index, 0);
+        surname = (String)table.getValueAt(index, 1);
+        email = (String)table.getValueAt(index, 2);
+        address = (String)table.getValueAt(index, 3);
+        address2 = (String)table.getValueAt(index, 4);
+        district = (String)table.getValueAt(index, 5);
+        city = (String)table.getValueAt(index, 6);
+        post = (String)table.getValueAt(index, 7);
+        phone = (String)table.getValueAt(index, 8);
+        store = (String)table.getValueAt(index, 9);
+        active = (String)table.getValueAt(index, 10);
+        
         initComponents();
+        
         this.setResizable(false);
+        
+        jtfName.setText(name);
+        jtfSurname.setText(surname);
+        jtfEmail.setText(email);
+        jtfAddress.setText(address);
+        jtfAddress2.setText(address2);
+        jtfDistrict.setText(district);
+        jtfPost.setText(post);
+        jtfPhone.setText(phone);
+        jcbxStore.setSelectedItem(store);
+        jcbxCity.setSelectedItem(city);
+        jcbxActive.setSelectedItem(active);
     }
 
     /**
@@ -33,85 +72,82 @@ public class clientInsert extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlblTitle = new javax.swing.JLabel();
-        jbtInsert = new javax.swing.JButton();
         jlblName = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
-        jtfSurname = new javax.swing.JTextField();
         jlblSurname = new javax.swing.JLabel();
+        jtfSurname = new javax.swing.JTextField();
         jlblEmail = new javax.swing.JLabel();
         jtfEmail = new javax.swing.JTextField();
         jlblAddress = new javax.swing.JLabel();
         jtfAddress = new javax.swing.JTextField();
-        jtfAddress2 = new javax.swing.JTextField();
         jlblAddress2 = new javax.swing.JLabel();
+        jtfAddress2 = new javax.swing.JTextField();
         jlblDistrict = new javax.swing.JLabel();
         jtfDistrict = new javax.swing.JTextField();
         jlblCity = new javax.swing.JLabel();
+        jcbxCity = new javax.swing.JComboBox<>();
         jlblPost = new javax.swing.JLabel();
         jtfPost = new javax.swing.JTextField();
-        jcbxCity = new javax.swing.JComboBox<>();
-        jcbxStore = new javax.swing.JComboBox<>();
-        jlblStore = new javax.swing.JLabel();
-        jtfPhone = new javax.swing.JTextField();
         jlblPhone = new javax.swing.JLabel();
+        jtfPhone = new javax.swing.JTextField();
+        jlblStore = new javax.swing.JLabel();
+        jcbxStore = new javax.swing.JComboBox<>();
+        jbtUpdate = new javax.swing.JButton();
+        jlblTitle = new javax.swing.JLabel();
+        jlblActive = new javax.swing.JLabel();
+        jcbxActive = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.POPUP);
 
-        jlblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jlblTitle.setText("Add Client");
-
-        jbtInsert.setText("Insert");
-        jbtInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtInsertActionPerformed(evt);
-            }
-        });
-
         jlblName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblName.setLabelFor(jtfName);
         jlblName.setText("First Name:");
 
         jlblSurname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblSurname.setLabelFor(jtfName);
         jlblSurname.setText("Last Name:");
 
         jlblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblEmail.setLabelFor(jtfName);
         jlblEmail.setText("Email:");
 
         jlblAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblAddress.setLabelFor(jtfName);
         jlblAddress.setText("Address:");
 
         jlblAddress2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblAddress2.setLabelFor(jtfName);
         jlblAddress2.setText("Address 2:");
 
         jlblDistrict.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblDistrict.setLabelFor(jtfName);
         jlblDistrict.setText("District:");
 
         jlblCity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblCity.setLabelFor(jtfName);
         jlblCity.setText("City:");
-
-        jlblPost.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblPost.setLabelFor(jtfName);
-        jlblPost.setText("Postal Code:");
 
         jcbxCity.setModel(populateCities());
 
-        jcbxStore.setModel(populateStores());
-
-        jlblStore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblStore.setLabelFor(jtfName);
-        jlblStore.setText("Store:");
+        jlblPost.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlblPost.setText("Postal Code:");
 
         jlblPhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jlblPhone.setLabelFor(jtfName);
         jlblPhone.setText("Phone:");
+
+        jlblStore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlblStore.setText("Store:");
+
+        jcbxStore.setModel(populateStores());
+
+        jbtUpdate.setText("Update Client Information");
+        jbtUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtUpdateActionPerformed(evt);
+            }
+        });
+
+        jlblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jlblTitle.setText("Edit Client");
+
+        jlblActive.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlblActive.setText("Active:");
+
+        jcbxActive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "True", "False" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,9 +187,11 @@ public class clientInsert extends javax.swing.JFrame {
                                     .addComponent(jlblEmail)
                                     .addComponent(jlblCity)
                                     .addComponent(jlblPhone)
-                                    .addComponent(jlblStore))
+                                    .addComponent(jlblStore)
+                                    .addComponent(jlblActive))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbxActive, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jcbxStore, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jtfPhone)
                                     .addComponent(jtfPost, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
@@ -166,7 +204,7 @@ public class clientInsert extends javax.swing.JFrame {
                         .addComponent(jlblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(jbtInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -214,93 +252,86 @@ public class clientInsert extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblStore)
                     .addComponent(jcbxStore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jbtInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblActive)
+                    .addComponent(jcbxActive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jbtUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
         // TODO add your handling code here:
-        String name = jtfName.getText();
-        String surname = jtfSurname.getText();
-        String email = jtfEmail.getText();
-        String address = jtfAddress.getText();
-        String address2 = jtfAddress2.getText();
-        String district = jtfDistrict.getText();
-        String post = jtfPost.getText();
-        String phone = jtfPhone.getText();
+        String newName = jtfName.getText();
+        String newSurname = jtfName.getText();
+        String newEmail = jtfName.getText();
+        String newAddress = jtfName.getText();
+        String newAddress2 = jtfName.getText();
+        String newDistrict = jtfName.getText();
+        String newCity = (String)jcbxCity.getSelectedItem();
+        String newPost = jtfName.getText();
+        String newPhone = jtfName.getText();
+        String newStore = (String)jcbxStore.getSelectedItem();
+        String newActive = (String)jcbxActive.getSelectedItem();
         
-        String citySQL = "(SELECT city_id " +
-                         "FROM city " +
-                         "WHERE city = '" + (String)jcbxCity.getSelectedItem() + "')";
+        String sql = "UPDATE customer " +
+                     "SET";
         
-        if (email.length() == 0)
-            email = "NULL";
-        else
-            email = "'" + email + "'";
+        if (newName != name)
+        {
+            sql += " first_name = '" + newName + "'";
+        }
         
-        if (address2.length() == 0)
-            address2 = "NULL";
-        else
-            address2 = "'" + address2 + "'";
+        if (newSurname != surname)
+        {
+            if (sql == "UPDATE customer " + "SET")
+                sql += " last_name = '" + newSurname + "'";
+            else
+                sql += " AND last_name = '" + newSurname + "'";
+        }
         
-        if (post.length() == 0)
-            post = "NULL";
-        else
-            post = "'" + post + "'";
+        if (newEmail != email)
+        {
+            if (sql == "UPDATE customer " + "SET")
+                sql += " email = '" + newEmail + "'";
+            else
+                sql += " AND email = '" + newEmail + "'";
+        }
         
-        Database instance = Database.instance();
+        if (newStore != store)
+        {
+            if (sql == "UPDATE customer " + "SET")
+                sql += " store_id = " + newStore + "";
+            else
+                sql += " AND store_id = " + newStore + "";
+        }
         
-        String sql = "INSERT INTO address " +
-                     "(address, address2, district, city_id, postal_code, phone) " +
-                     "VALUES('" + address + "', " + address2 + ", '" + district + "', " +
-                     citySQL + ", " + post + ", '" + phone + "')";
-        instance.execSQL(sql);
+        if (newActive != active)
+        {
+            if (newActive == "True")
+                newActive = "1";
+            else
+                newActive = "0";
+            
+            if (sql == "UPDATE customer " + "SET")
+                sql += " active = " + newActive + "";
+            else
+                sql += " AND active = " + newActive + "";
+        }
         
-        if (address2 == "NULL")
-            address2 = "IS NULL";
-        else
-            address2 = "= " + address2;
-        
-        if (post == "NULL")
-            post = "IS NULL";
-        else
-            post = "= " + post;
-        
-        String addressSQL = "(SELECT address_id " +
-                            "FROM address " +
-                            "WHERE address = '" + address + "' AND address2 " + address2 +
-                            " AND district = '" + district + "' AND city_id = " + citySQL + 
-                            " AND postal_code " + post + " AND phone = '" + phone + "')";        
-        sql = "INSERT INTO customer " +
-              "(first_name, last_name, email, address_id, store_id) " +
-              "VALUES('" + name + "', '" + surname + "', " + email + ", " + addressSQL +
-              ", " + (String)jcbxStore.getSelectedItem() + ")";
-        instance.execSQL(sql);
-        JOptionPane.showMessageDialog(this, "Client added successfully.");
+        if (sql != "UPDATE customer " + "SET")
+        {
+            Database instance = Database.instance();
+            instance.execSQL(sql);
+            JOptionPane.showMessageDialog(this, "Client updated successfully.");
+            parentForm.refreshClients();
+        }
+    }//GEN-LAST:event_jbtUpdateActionPerformed
 
-        clearForm();
-
-        parentForm.refreshClients();
-    }//GEN-LAST:event_jbtInsertActionPerformed
-
-    private void clearForm()
-    {
-        jtfName.setText("");
-        jtfSurname.setText("");
-        jtfEmail.setText("");
-        jtfAddress.setText("");
-        jtfAddress2.setText("");
-        jtfDistrict.setText("");
-        jtfPost.setText("");
-        jtfPhone.setText("");
-        jcbxStore.setSelectedIndex(0);
-        jcbxCity.setSelectedIndex(0);
-    }
-    
     private DefaultComboBoxModel populateCities()
     {
         Database instance = Database.instance();
@@ -320,9 +351,11 @@ public class clientInsert extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbtInsert;
+    private javax.swing.JButton jbtUpdate;
+    private javax.swing.JComboBox<String> jcbxActive;
     private javax.swing.JComboBox<String> jcbxCity;
     private javax.swing.JComboBox<String> jcbxStore;
+    private javax.swing.JLabel jlblActive;
     private javax.swing.JLabel jlblAddress;
     private javax.swing.JLabel jlblAddress2;
     private javax.swing.JLabel jlblCity;

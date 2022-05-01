@@ -4,10 +4,9 @@
  */
 package za.ac.up.cs.cos221;
 
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -22,6 +21,7 @@ public class main extends javax.swing.JFrame {
     TableRowSorter clientSorter;
     filmsInsert fI = null;
     clientInsert cI = null;
+    clientUpdate cU = null;
     
     /**
      * Creates new form main
@@ -29,14 +29,19 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         
+        this.setResizable(false);
+        
         staffSorter = new TableRowSorter(jtblStaff.getModel());
         jtblStaff.setRowSorter(staffSorter);
+        jtblStaff.setDefaultEditor(Object.class, null);
         
         filmSorter = new TableRowSorter(jtblFilms.getModel());
         jtblFilms.setRowSorter(filmSorter);
+        jtblFilms.setDefaultEditor(Object.class, null);
         
         clientSorter = new TableRowSorter(jtblClients.getModel());
         jtblClients.setRowSorter(clientSorter);
+        jtblClients.setDefaultEditor(Object.class, null);
     }
 
     /**
@@ -71,6 +76,8 @@ public class main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COS221 Prac 4");
+        setMaximumSize(new java.awt.Dimension(1163, 530));
+        setMinimumSize(new java.awt.Dimension(1163, 530));
 
         jtpMenu.setName("tabbedPane"); // NOI18N
 
@@ -231,6 +238,11 @@ public class main extends javax.swing.JFrame {
         });
 
         jbtUpdate.setText("Update Client Information");
+        jbtUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jplClientsLayout = new javax.swing.GroupLayout(jplClients);
         jplClients.setLayout(jplClientsLayout);
@@ -313,6 +325,7 @@ public class main extends javax.swing.JFrame {
         jtblInventory.setModel(generateReport());
         reportSorter = new TableRowSorter(jtblInventory.getModel());
         jtblInventory.setRowSorter(reportSorter);
+        jtblInventory.setDefaultEditor(Object.class, null);
     }//GEN-LAST:event_jbtReportActionPerformed
 
     private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
@@ -397,6 +410,23 @@ public class main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
+        // TODO add your handling code here:
+        if (jtblClients.getSelectionModel().isSelectionEmpty() == true)
+            JOptionPane.showMessageDialog(this, "Please select a client to update.");
+        else
+        {
+            if (cU == null)
+                cU = new clientUpdate(this, jtblClients);
+            else
+            {
+                cU.dispatchEvent(new WindowEvent(cU, WindowEvent.WINDOW_CLOSING));
+                cU = new clientUpdate(this, jtblClients);
+            }
+            cU.setVisible(true);
+        }
+    }//GEN-LAST:event_jbtUpdateActionPerformed
+
     private void filterRows()
     {
         staffSorter.setRowFilter(new rowFilter(jtfLastName.getText()));
@@ -404,7 +434,8 @@ public class main extends javax.swing.JFrame {
     
     private DefaultTableModel populateStaff()
     {
-        String[] headers = {"First Name", "Last Name", "Address", "Address 2", "District", "City", "Postal Code", "Phone", "Store", "Active"};
+        String[] headers = {"First Name", "Last Name", "Address", "Address 2", "District", "City", "Postal Code", "Phone", 
+                            "Store", "Active"};
         
         Database instance = Database.instance();
         
@@ -417,7 +448,8 @@ public class main extends javax.swing.JFrame {
     
     private DefaultTableModel populateFilms()
     {
-        String[] headers = {"Title", "Description", "Release Year", "Language", "Rental Duration", "Length", "Replacement Cost", "Rating", "Special Features"};
+        String[] headers = {"Title", "Description", "Release Year", "Language", "Rental Duration", "Length", "Replacement Cost", 
+                            "Rating", "Special Features"};
         
         Database instance = Database.instance();
         
@@ -444,7 +476,8 @@ public class main extends javax.swing.JFrame {
     
     private DefaultTableModel populateClients()
     {
-        String[] headers = {"First Name", "Last Name", "Email", "Address", "Address 2", "District", "City", "Postal Code", "Phone", "Store Name", "Active"};
+        String[] headers = {"First Name", "Last Name", "Email", "Address", "Address 2", "District", "City", "Postal Code", "Phone", 
+                            "Store Name", "Active"};
         
         Database instance = Database.instance();
         

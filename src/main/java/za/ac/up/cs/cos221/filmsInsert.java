@@ -24,6 +24,7 @@ public class filmsInsert extends javax.swing.JFrame {
     public filmsInsert(main parent) {
         parentForm = parent;
         initComponents();
+        this.setResizable(false);
     }
 
     /**
