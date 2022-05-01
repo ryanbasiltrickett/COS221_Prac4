@@ -37,7 +37,6 @@ public class Database {
             String url = "jdbc:" + prop.getProperty("SAKILA_DB_PROTO") + "://" + prop.getProperty("SAKILA_DB_HOST")
                          + ":" + prop.getProperty("SAKILA_DB_PORT") + "/" + prop.getProperty("SAKILA_DB_NAME");
             
-            System.out.println(url);
             con = DriverManager.getConnection(url, prop.getProperty("SAKILA_DB_USERNAME"), prop.getProperty("SAKILA_DB_PASSWORD"));
         }
         catch (ClassNotFoundException | SQLException e)
