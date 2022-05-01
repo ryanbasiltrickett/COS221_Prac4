@@ -4,7 +4,9 @@
  */
 package za.ac.up.cs.cos221;
 
+import java.io.FileReader;
 import java.sql.*;
+import java.util.Properties;
 
 /**
  *
@@ -14,16 +16,29 @@ public class Database {
     private static Database instance = null;
     private Connection con = null;
     
-    final String URL = "jdbc:mysql://localhost:3307/u21431885_sakila";
-    final String USER = "root";
-    final String PASS = "Tiger020912";
+    final String CONFIG_FILE = "app.config";
     
     private Database()
     {
         try
         {
+            Properties prop = new Properties();
+            try (FileReader reader = new FileReader(CONFIG_FILE))
+            {
+               prop.load(reader);
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASS);
+            
+            String url = "jdbc:" + prop.getProperty("SAKILA_DB_PROTO") + "://" + prop.getProperty("SAKILA_DB_HOST")
+                         + ":" + prop.getProperty("SAKILA_DB_PORT") + "/" + prop.getProperty("SAKILA_DB_NAME");
+            
+            System.out.println(url);
+            con = DriverManager.getConnection(url, prop.getProperty("SAKILA_DB_USERNAME"), prop.getProperty("SAKILA_DB_PASSWORD"));
         }
         catch (ClassNotFoundException | SQLException e)
         {
