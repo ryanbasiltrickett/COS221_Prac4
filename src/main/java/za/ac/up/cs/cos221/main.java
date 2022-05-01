@@ -98,9 +98,6 @@ public class main extends javax.swing.JFrame {
 
         jtblStaff.setModel(populateStaff());
         jspStaff.setViewportView(jtblStaff);
-        if (jtblStaff.getColumnModel().getColumnCount() > 0) {
-            jtblStaff.getColumnModel().getColumn(9).setHeaderValue("Active");
-        }
 
         javax.swing.GroupLayout jplStaffLayout = new javax.swing.GroupLayout(jplStaff);
         jplStaff.setLayout(jplStaffLayout);
