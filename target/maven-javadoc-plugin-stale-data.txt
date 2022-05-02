@@ -1,0 +1,59 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/Ryan/.m2/repository/mysql/mysql-connector-java/8.0.29/mysql-connector-java-8.0.29.jar;C:/Users/Ryan/.m2/repository/com/google/protobuf/protobuf-java/3.19.4/protobuf-java-3.19.4.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.7'
+-sourcepath
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java;C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'prac04 1.0 API'
+-linkoffline
+'https://docs.oracle.com/javase/7/docs/api' 'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'prac04 1.0 API'
+za.ac.up.cs.cos221
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/App.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/clientInsert.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/clientUpdate.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/Database.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/filmsInsert.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/main.java'
+'C:/Users/Ryan/Desktop/University/COS221/Practicals/Practical 4/prac04/src/main/java/za/ac/up/cs/cos221/rowFilter.java'
+C:\Users\Ryan\.m2\repository\mysql\mysql-connector-java\8.0.29\mysql-connector-java-8.0.29.jar = 1651060145073
+C:\Users\Ryan\.m2\repository\com\google\protobuf\protobuf-java\3.19.4\protobuf-java-3.19.4.jar = 1651060145047
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\src\main\java = 1651418467171
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\generated-sources\annotations = 1651479177173
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\allclasses-index.html = 1651479382444
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\allpackages-index.html = 1651479382452
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\copy.svg = 1651479382517
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\element-list = 1651479382260
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\help-doc.html = 1651479382505
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\index-all.html = 1651479382493
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\index.html = 1651479382497
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\jquery-ui.overrides.css = 1651479382587
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\member-search-index.js = 1651479382465
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\module-search-index.js = 1651479382455
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\overview-tree.html = 1651479382418
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\package-search-index.js = 1651479382457
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\script.js = 1651479382514
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\search.js = 1651479382527
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\serialized-form.html = 1651479382370
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\stylesheet.css = 1651479382511
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\tag-search-index.js = 1651479382467
+C:\Users\Ryan\Desktop\University\COS221\Practicals\Practical 4\prac04\target\apidocs\type-search-index.js = 1651479382462
