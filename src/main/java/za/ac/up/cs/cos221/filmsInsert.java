@@ -1,12 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package za.ac.up.cs.cos221;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -256,13 +249,12 @@ public class filmsInsert extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {
         parentForm.refreshFilms();
-    }//GEN-LAST:event_formWindowClosed
+    }
 
-    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
-        // TODO add your handling code here:
+    // Onclick event for Insert Button
+    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {
         String title = jtfTitle.getText();
         String desc = jtaDescription.getText();
         String yearReleased = jtfRealeaseYear.getText();
@@ -279,6 +271,7 @@ public class filmsInsert extends javax.swing.JFrame {
         "FROM language " +
         "WHERE name = '" + (String)jcbxLanguage.getSelectedItem() + "')";
 
+        // formatting variables for SQL
         if (desc.length() == 0)
             desc = "NULL";
         else
@@ -324,8 +317,9 @@ public class filmsInsert extends javax.swing.JFrame {
         clearForm();
 
         parentForm.refreshFilms();
-    }//GEN-LAST:event_jbtInsertActionPerformed
+    }
     
+    // Resets form info
     private void clearForm()
     {
         jtfTitle.setText("");
@@ -341,6 +335,7 @@ public class filmsInsert extends javax.swing.JFrame {
         jcbxOrigLang.setSelectedIndex(0);
     }
     
+    // Returns ComboBoxModel with language data
     private DefaultComboBoxModel populateLanguages()
     {
         Database instance = Database.instance();
@@ -350,6 +345,7 @@ public class filmsInsert extends javax.swing.JFrame {
         return new DefaultComboBoxModel(instance.returnArray(sql)); 
     }
     
+    // Returns ComboBoxModel with orginal language data
     private DefaultComboBoxModel populateOrgLanguages()
     {
         Database instance = Database.instance();
@@ -366,7 +362,6 @@ public class filmsInsert extends javax.swing.JFrame {
         return new DefaultComboBoxModel(arr); 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtInsert;
     private javax.swing.JComboBox<String> jcbxLanguage;
     private javax.swing.JComboBox<String> jcbxOrigLang;
@@ -392,5 +387,4 @@ public class filmsInsert extends javax.swing.JFrame {
     private javax.swing.JTextField jtfReplaceCost;
     private javax.swing.JTextField jtfSpecial;
     private javax.swing.JTextField jtfTitle;
-    // End of variables declaration//GEN-END:variables
 }

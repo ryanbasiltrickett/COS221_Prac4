@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package za.ac.up.cs.cos221;
 
 import java.io.FileReader;
 import java.sql.*;
 import java.util.Properties;
 
-/**
- *
- * @author Ryan
- */
 public class Database {
     private static Database instance = null;
     private Connection con = null;
@@ -22,6 +14,7 @@ public class Database {
     {
         try
         {
+            // use config file
             Properties prop = new Properties();
             try (FileReader reader = new FileReader(CONFIG_FILE))
             {
@@ -32,8 +25,8 @@ public class Database {
                 System.out.println(e);
             }
             
+            // connect to database
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
             String url = "jdbc:" + prop.getProperty("SAKILA_DB_PROTO") + "://" + prop.getProperty("SAKILA_DB_HOST")
                          + ":" + prop.getProperty("SAKILA_DB_PORT") + "/" + prop.getProperty("SAKILA_DB_NAME");
             
@@ -53,6 +46,7 @@ public class Database {
         return instance;
     }
     
+    // Destructor
     protected void finalize()
     {
         try
@@ -66,6 +60,7 @@ public class Database {
         }
     }
     
+    // Returns tuples
     public Object[][] returnRows(String query)
     {
         Object[][] rows = {};
@@ -96,6 +91,7 @@ public class Database {
         return rows;
     }
     
+    // Returns first column as a sing array
     public String[] returnArray(String query)
     {
         String[] arr = {};
@@ -121,6 +117,7 @@ public class Database {
         return arr;
     }
     
+    // Executes SQL statements
     public void execSQL(String query)
     {
         try 

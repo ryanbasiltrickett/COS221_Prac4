@@ -1,9 +1,6 @@
 package za.ac.up.cs.cos221;
 
-/**
- * Hello world!
- *
- */
+//Main App Class
 public class App 
 {    
     public static void main( String[] args )

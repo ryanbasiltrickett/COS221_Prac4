@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package za.ac.up.cs.cos221;
 
 import java.awt.event.WindowEvent;
@@ -9,10 +5,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author Ryan
- */
 public class main extends javax.swing.JFrame {
 
     TableRowSorter staffSorter;
@@ -295,45 +287,37 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfLastNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLastNameKeyReleased
-        // TODO add your handling code here:
+    private void jtfLastNameKeyReleased(java.awt.event.KeyEvent evt) {
         filterRows();
-    }//GEN-LAST:event_jtfLastNameKeyReleased
+    }
 
-    private void jtfLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLastNameKeyPressed
-        // TODO add your handling code here:
+    private void jtfLastNameKeyPressed(java.awt.event.KeyEvent evt) {
         filterRows();
-    }//GEN-LAST:event_jtfLastNameKeyPressed
+    }
 
-    private void jtfLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLastNameKeyTyped
-        // TODO add your handling code here:
+    private void jtfLastNameKeyTyped(java.awt.event.KeyEvent evt) {
         filterRows();
-    }//GEN-LAST:event_jtfLastNameKeyTyped
+    }
 
-    private void jbtInsertFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertFilmActionPerformed
-        // TODO add your handling code here:
+    private void jbtInsertFilmActionPerformed(java.awt.event.ActionEvent evt) {
         if (fI == null)
             fI = new filmsInsert(this);
         fI.setVisible(true);
-    }//GEN-LAST:event_jbtInsertFilmActionPerformed
+    }
 
-    private void jbtReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtReportActionPerformed
-        // TODO add your handling code here:
+    private void jbtReportActionPerformed(java.awt.event.ActionEvent evt) {
         jtblInventory.setModel(generateReport());
         reportSorter = new TableRowSorter(jtblInventory.getModel());
         jtblInventory.setRowSorter(reportSorter);
         jtblInventory.setDefaultEditor(Object.class, null);
-    }//GEN-LAST:event_jbtReportActionPerformed
-
-    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
-        // TODO add your handling code here:
+    }
+    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {
         if (cI == null)
             cI = new clientInsert(this);
         cI.setVisible(true);
-    }//GEN-LAST:event_jbtInsertActionPerformed
+    }
 
-    private void jbtDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDeleteActionPerformed
-        // TODO add your handling code here:
+    private void jbtDeleteActionPerformed(java.awt.event.ActionEvent evt) {
         if (jtblClients.getSelectionModel().isSelectionEmpty() == true)
             JOptionPane.showMessageDialog(this, "Please select a client to remove.");
         else
@@ -429,10 +413,9 @@ public class main extends javax.swing.JFrame {
                 refreshClients();
             }
         }
-    }//GEN-LAST:event_jbtDeleteActionPerformed
+    }
 
-    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
-        // TODO add your handling code here:
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {
         if (jtblClients.getSelectionModel().isSelectionEmpty() == true)
             JOptionPane.showMessageDialog(this, "Please select a client to update.");
         else
@@ -446,7 +429,7 @@ public class main extends javax.swing.JFrame {
             }
             cU.setVisible(true);
         }
-    }//GEN-LAST:event_jbtUpdateActionPerformed
+    }
 
     private void filterRows()
     {
@@ -543,7 +526,6 @@ public class main extends javax.swing.JFrame {
         jtblClients.setRowSorter(clientSorter);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtDelete;
     private javax.swing.JButton jbtInsert;
     private javax.swing.JButton jbtInsertFilm;
@@ -564,5 +546,4 @@ public class main extends javax.swing.JFrame {
     public javax.swing.JTable jtblStaff;
     private javax.swing.JTextField jtfLastName;
     private javax.swing.JTabbedPane jtpMenu;
-    // End of variables declaration//GEN-END:variables
 }

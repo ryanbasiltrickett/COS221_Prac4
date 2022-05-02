@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package za.ac.up.cs.cos221;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-/**
- *
- * @author Ryan
- */
 public class clientUpdate extends javax.swing.JFrame {
 
     main parentForm;
@@ -27,9 +19,7 @@ public class clientUpdate extends javax.swing.JFrame {
     String store;
     String active;
     
-    /**
-     * Creates new form clientUpdate
-     */
+    // Creates new form clientUpdate
     public clientUpdate(main parent, JTable table) {
         parentForm = parent;
         
@@ -279,8 +269,8 @@ public class clientUpdate extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtUpdateActionPerformed
-        // TODO add your handling code here:
+    // Onclik event for Update Button
+    private void jbtUpdateActionPerformed(java.awt.event.ActionEvent evt) {
         String newName = jtfName.getText();
         String newSurname = jtfSurname.getText();
         String newEmail = jtfEmail.getText();
@@ -293,6 +283,7 @@ public class clientUpdate extends javax.swing.JFrame {
         String newStore = (String)jcbxStore.getSelectedItem();
         String newActive = (String)jcbxActive.getSelectedItem();
         
+        // promt user
         int input = JOptionPane.showConfirmDialog(this, "You sure you want to update customer:\n" + 
                                                         "First Name: " + name + "\n" +
                                                         "Last Name: " + surname + "\n" +
@@ -318,6 +309,7 @@ public class clientUpdate extends javax.swing.JFrame {
                                                         "Store Name: " + newStore + "\n" +
                                                         "Active: " + newActive);
             
+        // creation of SQL statements
         if (input == 0)
         {
             boolean updated = false;
@@ -541,8 +533,9 @@ public class clientUpdate extends javax.swing.JFrame {
                 active = (String)jcbxActive.getSelectedItem();
             }
         }
-    }//GEN-LAST:event_jbtUpdateActionPerformed
+    }
 
+    // Returns a ComboBoxModel with city data
     private DefaultComboBoxModel populateCities()
     {
         Database instance = Database.instance();
@@ -552,6 +545,7 @@ public class clientUpdate extends javax.swing.JFrame {
         return new DefaultComboBoxModel(instance.returnArray(sql)); 
     }
     
+    // Returns a ComboBoxModel with store data
     private DefaultComboBoxModel populateStores()
     {
         Database instance = Database.instance();
@@ -561,7 +555,6 @@ public class clientUpdate extends javax.swing.JFrame {
         return new DefaultComboBoxModel(instance.returnArray(sql)); 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtUpdate;
     private javax.swing.JComboBox<String> jcbxActive;
     private javax.swing.JComboBox<String> jcbxCity;
@@ -586,5 +579,4 @@ public class clientUpdate extends javax.swing.JFrame {
     private javax.swing.JTextField jtfPhone;
     private javax.swing.JTextField jtfPost;
     private javax.swing.JTextField jtfSurname;
-    // End of variables declaration//GEN-END:variables
 }

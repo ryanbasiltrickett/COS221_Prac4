@@ -1,23 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package za.ac.up.cs.cos221;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Ryan
- */
 public class clientInsert extends javax.swing.JFrame {
 
     main parentForm;
     
-    /**
-     * Creates new form clientInsert
-     */
+    //Creates new form clientInsert
     public clientInsert(main parent) {
         parentForm = parent;
         initComponents();
@@ -222,8 +212,8 @@ public class clientInsert extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInsertActionPerformed
-        // TODO add your handling code here:
+    // Onclik event for Insert Button
+    private void jbtInsertActionPerformed(java.awt.event.ActionEvent evt) {
         String name = jtfName.getText();
         String surname = jtfSurname.getText();
         String email = jtfEmail.getText();
@@ -237,6 +227,7 @@ public class clientInsert extends javax.swing.JFrame {
                          "FROM city " +
                          "WHERE city = '" + (String)jcbxCity.getSelectedItem() + "')";
         
+        // formating variables for SQL
         if (email.length() == 0)
             email = "NULL";
         else
@@ -260,6 +251,7 @@ public class clientInsert extends javax.swing.JFrame {
                      citySQL + ", " + post + ", '" + phone + "')";
         instance.execSQL(sql);
         
+        // formating variables for SQL
         if (address2 == "NULL")
             address2 = "IS NULL";
         else
@@ -285,8 +277,9 @@ public class clientInsert extends javax.swing.JFrame {
         clearForm();
 
         parentForm.refreshClients();
-    }//GEN-LAST:event_jbtInsertActionPerformed
+    }
 
+    // Resets all inputs to default
     private void clearForm()
     {
         jtfName.setText("");
@@ -301,6 +294,7 @@ public class clientInsert extends javax.swing.JFrame {
         jcbxCity.setSelectedIndex(0);
     }
     
+    // Returns a ComboBoxModel with city data
     private DefaultComboBoxModel populateCities()
     {
         Database instance = Database.instance();
@@ -310,6 +304,7 @@ public class clientInsert extends javax.swing.JFrame {
         return new DefaultComboBoxModel(instance.returnArray(sql)); 
     }
     
+    // Returns a ComboBoxModel with store data
     private DefaultComboBoxModel populateStores()
     {
         Database instance = Database.instance();
@@ -319,7 +314,6 @@ public class clientInsert extends javax.swing.JFrame {
         return new DefaultComboBoxModel(instance.returnArray(sql)); 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtInsert;
     private javax.swing.JComboBox<String> jcbxCity;
     private javax.swing.JComboBox<String> jcbxStore;
@@ -342,5 +336,4 @@ public class clientInsert extends javax.swing.JFrame {
     private javax.swing.JTextField jtfPhone;
     private javax.swing.JTextField jtfPost;
     private javax.swing.JTextField jtfSurname;
-    // End of variables declaration//GEN-END:variables
 }
