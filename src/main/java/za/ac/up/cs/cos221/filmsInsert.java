@@ -3,10 +3,6 @@ package za.ac.up.cs.cos221;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Ryan
- */
 public class filmsInsert extends javax.swing.JFrame {
 
     main parentForm;
