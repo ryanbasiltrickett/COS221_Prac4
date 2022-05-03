@@ -27,7 +27,7 @@ public class Database {
             
             // connect to database
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:" + prop.getProperty("SAKILA_DB_PROTO") + "://" + prop.getProperty("SAKILA_DB_HOST")
+            String url = prop.getProperty("SAKILA_DB_PROTO") + "://" + prop.getProperty("SAKILA_DB_HOST")
                          + ":" + prop.getProperty("SAKILA_DB_PORT") + "/" + prop.getProperty("SAKILA_DB_NAME");
             
             con = DriverManager.getConnection(url, prop.getProperty("SAKILA_DB_USERNAME"), prop.getProperty("SAKILA_DB_PASSWORD"));
